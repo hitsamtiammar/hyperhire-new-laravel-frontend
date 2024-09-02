@@ -3,5 +3,5 @@
 }
 
 .rightContainer{
-    @apply md:ml-[255px]
+    @apply md:ml-[255px] w-full
 }

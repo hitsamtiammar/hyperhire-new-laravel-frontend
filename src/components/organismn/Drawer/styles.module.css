@@ -1,3 +1,19 @@
 .drawerRoot{
     @apply w-[255px] h-screen bg-primary rounded-3xl md:fixed
 }
+
+.drawerHeading{
+    @apply flex flex-row p-8 justify-between
+}
+
+.firstList{
+    @apply mx-4 bg-secondary rounded-md
+}
+
+.itemMenu{
+    @apply bg-limegreen rounded-xl !mx-0 px-4
+}
+
+.secondList{
+    @apply mx-4 mt-4
+}

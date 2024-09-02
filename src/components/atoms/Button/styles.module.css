@@ -1,0 +1,4 @@
+.buttonFilled{
+    @apply h-[38px] rounded-2xl min-w-[133px] 
+        transition-colors font-bold text-sm
+}

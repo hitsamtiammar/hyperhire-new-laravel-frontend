@@ -9,20 +9,20 @@ import { FaRegFolder } from "react-icons/fa";
 export default function Drawer () {
   return (
     <div className={styles.drawerRoot}>
-      <div className="flex row p-8 justify-between">
+      <div className={styles.drawerHeading}>
         <img src={CloitLogo} alt="Cloit Logo" />
         <button className="">
           <img src={OpenMenu} alt="Cloit Logo" />
         </button>
       </div>
-      <div className="mx-4 bg-secondary rounded-md">
+      <div className={styles.firstList}>
         <ListItem text="System" textStyle="text-white" Icon={() => <MdFolder color="white" size="30px" />} />
         <ListItem text="System Code" Icon={() => <img src={SubMenu} />} />
         <ListItem text="Properties" Icon={() => <img src={Submenu2} />} />
-        <ListItem text="Menus" className="bg-limegreen rounded-xl !mx-0 px-4" textStyle="text-bluegrey-900" Icon={() => <BsGridFill size="25px" />} />
+        <ListItem text="Menus" className={styles.itemMenu} textStyle="text-bluegrey-900" Icon={() => <BsGridFill size="25px" />} />
         <ListItem text="API List" Icon={() => <img src={Submenu2} />} />
       </div>
-      <div className="mx-4 mt-4">
+      <div className={styles.secondList}>
         <ListItem text="Users & Groups" Icon={() => <FaRegFolder className="text-bluegrey" size="30px"/>} />
         <ListItem text="Competition" Icon={() => <FaRegFolder className="text-bluegrey" size="30px"/>} />
       </div>

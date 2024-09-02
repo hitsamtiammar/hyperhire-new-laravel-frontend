@@ -1,3 +1,27 @@
 .headingContainer{
     @apply h-[84px] items-center
 }
+
+.homeContainer{
+    @apply flex flex-col flex-1 m-10
+}
+
+.menuSelect{
+    @apply w-[349px]
+}
+
+.leftContainer{
+    @apply flex h-28 flex-row
+}
+
+.buttonGroup{
+    @apply flex gap-2 flex-row mt-4
+}
+
+.buttonExpandAll{
+    @apply bg-secondary hover:bg-primary text-white
+}
+
+.buttonCollapseAll{
+    @apply border-bluegrey-300  hover:bg-bluegrey-900 hover:text-white border
+}

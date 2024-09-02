@@ -11,7 +11,8 @@ export default {
         secondary: '#1D2939',
         bluegrey: {
           DEFAULT: '#667085',
-        300: '#D0D5DD',
+          300: '#D0D5DD',
+          600: '#475467',
           900: '#101828'
         },
         limegreen: '#9FF443',
@@ -23,6 +24,8 @@ export default {
       serif: ['Merriweather', 'serif'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
 

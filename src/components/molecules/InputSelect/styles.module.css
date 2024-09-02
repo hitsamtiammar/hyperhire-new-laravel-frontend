@@ -1,0 +1,11 @@
+.mainContainer{
+    @apply flex flex-col
+}
+
+.input{
+    @apply form-select w-full border-none bg-gray-50 rounded-3xl h-[52px]
+}
+
+.label{
+    @apply text-bluegrey-600 text-sm mb-2
+}
