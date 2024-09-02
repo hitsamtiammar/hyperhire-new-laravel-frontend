@@ -11,6 +11,7 @@ export default {
         secondary: '#1D2939',
         bluegrey: {
           DEFAULT: '#667085',
+        300: '#D0D5DD',
           900: '#101828'
         },
         limegreen: '#9FF443',

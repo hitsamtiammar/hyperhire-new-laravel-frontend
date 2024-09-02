@@ -1,0 +1,14 @@
+.mainContainer{
+    @apply flex flex-row
+}
+
+.iconContainer{
+    @apply 
+    flex items-center 
+    justify-center w-10 h-10 
+    bg-blue-700 rounded-full
+}
+
+.logoText{
+    @apply text-bluegrey-900 text-4xl font-bold ml-4
+}

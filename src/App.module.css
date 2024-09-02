@@ -1,0 +1,7 @@
+.mainContainer{
+    @apply flex flex-row
+}
+
+.rightContainer{
+    @apply md:ml-[255px]
+}
