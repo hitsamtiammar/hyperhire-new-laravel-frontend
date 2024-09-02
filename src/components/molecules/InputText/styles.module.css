@@ -1,0 +1,12 @@
+.mainContainer{
+    @apply flex flex-col
+}
+
+.input{
+    @apply disabled:opacity-25 border-none 
+    rounded-3xl bg-bluegrey-300  h-[52px]
+}
+
+.label{
+    @apply text-bluegrey-600 text-sm mb-2
+}

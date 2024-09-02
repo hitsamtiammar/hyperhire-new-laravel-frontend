@@ -1,0 +1,7 @@
+.inputContainer{
+    @apply w-[262px] mt-3
+}
+
+.btnSubmit{
+    @apply w-[263px] bg-arthicBlue hover:bg-blue-400 text-white mt-3 h-[52px] rounded-full
+}

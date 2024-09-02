@@ -4,6 +4,7 @@ import HeadingLogo from '@/components/molecules/HeadingLogo'
 import styles from './styles.module.css'
 import InputSelect from '@/components/molecules/InputSelect'
 import Button from '@/components/atoms/Button'
+import EditForm from '@/components/organismn/EditForm'
 
 export default function Home() {
   return (
@@ -22,7 +23,9 @@ export default function Home() {
             <Button className={styles.buttonCollapseAll}>Collapse All</Button>
           </div>
         </div>
-        <div className="flex-1"></div>
+        <div className="flex-1">
+          <EditForm/>
+        </div>
       </div>
      
     </div>

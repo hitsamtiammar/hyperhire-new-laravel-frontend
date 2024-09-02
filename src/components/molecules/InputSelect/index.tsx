@@ -8,13 +8,14 @@ export interface InputSelectProps{
     label: string
     labelClassName?: string;
     children?: React.JSX.Element[]
+    disabled?: boolean
 }
 
-export default function InputSelect({className, inputClassName, labelClassName, label, children}: InputSelectProps) {
+export default function InputSelect({disabled = false, className, inputClassName, labelClassName, label, children}: InputSelectProps) {
   return (
     <div className={`${styles.mainContainer} ${className}`}>
         <Text className={`${styles.label} ${labelClassName}`}>{label}</Text>
-        <select className={`${styles.input} ${inputClassName}`}>
+        <select disabled={disabled} className={`${styles.input} ${inputClassName}`}>
             {children}
         </select>
     </div>
