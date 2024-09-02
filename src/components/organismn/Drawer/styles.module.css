@@ -1,0 +1,3 @@
+.drawerRoot{
+    @apply w-[255px] h-screen bg-primary rounded-3xl
+}
