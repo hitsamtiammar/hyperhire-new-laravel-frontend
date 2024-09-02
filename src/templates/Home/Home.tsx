@@ -5,15 +5,21 @@ import styles from './styles.module.css'
 import InputSelect from '@/components/molecules/InputSelect'
 import Button from '@/components/atoms/Button'
 import EditForm from '@/components/organismn/EditForm'
+import { RootMenu } from '@/api/actions.interface'
 
-export default function Home() {
+export interface HomeProps{
+  rootData: RootMenu[]
+  rootDataLoading?: boolean
+}
+
+export default function Home({ rootData, rootDataLoading = false }: HomeProps) {
   return (
     <div className={styles.homeContainer}>
       <BreadCrumb className={styles.headingContainer} items={['Menus']}/>
       <HeadingLogo  className={styles.headingContainer}/>
-      <InputSelect label="Menu" className={styles.menuSelect} >
-        {['test 1', 'test 2', 'test 3', 'test 4'].map(item => (
-          <option key={item} value={item}>{item}</option>
+      <InputSelect disabled={rootDataLoading} label="Menu" className={styles.menuSelect} >
+        {rootData.map(item => (
+          <option key={item.id} value={item.id}>{item.name}</option>
         ))}
       </InputSelect>
       <div className={styles.leftContainer}>
