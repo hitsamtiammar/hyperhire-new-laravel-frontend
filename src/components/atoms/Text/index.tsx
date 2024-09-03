@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 export interface TextProps{
     children?: string | JSX.Element | JSX.Element[]

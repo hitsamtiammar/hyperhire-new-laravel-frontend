@@ -7,7 +7,6 @@ import styles from './styles.module.css'
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { actionFlagState, selectedItemState } from '@/recoil/atoms';
 import IconButton from '@/components/atoms/IconButton';
-import React from 'react';
 
 export interface ListDataItem{
     id: string;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { CloitLogo, OpenMenu, SubMenu, Submenu2 } from '@/assets/logo'
 import { MdFolder } from "react-icons/md";
