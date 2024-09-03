@@ -7,3 +7,11 @@
 body {
   font-family:'Plus Jakarta Sans';
 }
+
+.display-row{
+  @apply flex flex-row
+}
+
+.display-col{
+  @apply flex flex-col
+}

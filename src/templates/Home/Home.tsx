@@ -14,24 +14,26 @@ export interface HomeProps{
   rootDataLoading?: boolean
   onRootChange: (value: string) => void
   mainData?: ListDataItem
+  onSave?: (item: ListDataItem | null, name: string) => void
+  onDelete?: (item: ListDataItem | null, name: string) => void
 }
 
-function Home({ onRootChange = noop, rootData, mainData, rootDataLoading = false }: HomeProps) {
-  console.log('mainData', mainData)
+function Home({ onDelete, onSave, onRootChange = noop, rootData, mainData, rootDataLoading = false }: HomeProps) {
   return (
     <div className={styles.homeContainer}>
       <BreadCrumb className={styles.headingContainer} items={['Menus']}/>
       <HeadingLogo  className={styles.headingContainer}/>
-      <InputSelect onChange={(e) => onRootChange(e.target.value)} disabled={rootDataLoading} label="Menu" className={styles.menuSelect} >
-      <>
-        {rootData.map(item => (
-            <option key={item.id} value={item.id}>{item.name}</option>
-          ))}
-          <option value="">
-            <Button className="bg-blue-500">--- Add New Root ---</Button>
-          </option>
-      </>
-      </InputSelect>
+      <div className="flex flex-col justify-start">
+        <InputSelect onChange={(e) => onRootChange(e.target.value)} disabled={rootDataLoading} label="Menu" className={styles.menuSelect} >
+          <>
+            {rootData.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
+          </>
+        </InputSelect>
+        <Button className="bg-primary hover:bg-slate-100 hover:text-primary text-white w-28 mt-3" >Add New Root + </Button>
+      </div>
+    
       <div className={styles.leftContainer}>
         <div className="flex-1">
           <div className={styles.buttonGroup}>
@@ -41,7 +43,7 @@ function Home({ onRootChange = noop, rootData, mainData, rootDataLoading = false
           {mainData &&  <ListData data={mainData as ListDataItem}  /> }
         </div>
         <div className="flex-1">
-          <EditForm/>
+          <EditForm onDelete={onDelete} onSave={onSave} />
         </div>
       </div>
      

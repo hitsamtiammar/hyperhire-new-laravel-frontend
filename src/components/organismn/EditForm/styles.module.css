@@ -2,6 +2,14 @@
     @apply w-[262px] mt-3
 }
 
+.btn{
+    @apply w-[263px]  h-[52px] rounded-full text-white mt-3
+}
+
 .btnSubmit{
-    @apply w-[263px] bg-arthicBlue hover:bg-blue-400 text-white mt-3 h-[52px] rounded-full
+    @apply btn bg-arthicBlue hover:bg-blue-400 
+}
+
+.btnDelete{
+    @apply btn bg-red-500 hover:bg-red-400 ml-3
 }

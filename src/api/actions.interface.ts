@@ -10,3 +10,12 @@ export interface RootApiResponse{
     status: number;
     menus: RootMenu[]
 }
+
+export interface UpdateRequest{
+    id: string;
+    name: string
+}
+
+export interface DeleteRequest{
+    id: string;
+}
