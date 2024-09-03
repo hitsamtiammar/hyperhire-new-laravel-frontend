@@ -1,17 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { CloitLogo, OpenMenu, SubMenu, Submenu2 } from '@/assets/logo'
 import { MdFolder } from "react-icons/md";
 import ListItem from '@/components/molecules/ListItem';
 import { BsGridFill } from "react-icons/bs";
 import { FaRegFolder } from "react-icons/fa";
+import { useRecoilState } from 'recoil';
+import { actionFlagState } from '@/recoil/atoms';
 
 export default function Drawer () {
+  const [actionFlag, setActionFlag] = useRecoilState(actionFlagState)
+  const [position, setPosition] = useState('')
+
+  useEffect(() => {
+    let p = ''
+    if(actionFlag.type === 'display-drawer'){
+      p =  'left-[0px]'
+      setPosition(p)
+    }else if(actionFlag.type === 'remove-drawer'){
+      p =  'left-[-260px]'
+      setPosition(p)
+    }
+    
+  }, [actionFlag.type])
+
   return (
-    <div className={styles.drawerRoot}>
+    <div className={`${styles.drawerRoot} ${position}`}>
       <div className={styles.drawerHeading}>
         <img src={CloitLogo} alt="Cloit Logo" />
-        <button className="">
+        <button onClick={() => setActionFlag({
+          data: {},
+          type: 'remove-drawer'
+        })} className="">
           <img src={OpenMenu} alt="Cloit Logo" />
         </button>
       </div>

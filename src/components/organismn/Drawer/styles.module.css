@@ -1,5 +1,7 @@
 .drawerRoot{
-    @apply w-[255px] h-screen bg-primary rounded-3xl hidden lg:block lg:fixed
+    @apply w-[255px] h-screen bg-primary rounded-3xl
+    left-[-260px] lg:!left-0 
+    lg:block fixed transition-all
 }
 
 .drawerHeading{
