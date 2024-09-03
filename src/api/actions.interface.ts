@@ -19,3 +19,8 @@ export interface UpdateRequest{
 export interface DeleteRequest{
     id: string;
 }
+
+export interface InsertRequest{
+    name: string;
+    parent?: string | null
+}

@@ -1,15 +1,16 @@
-import { deleteData, getAllDataFromRootId, getRootData, updateData } from '@/api/actions'
-import { RootApiResponse } from '@/api/actions.interface'
+import { deleteData, getAllDataFromRootId, getRootData, insertData, updateData } from '@/api/actions'
+import { InsertRequest, RootApiResponse } from '@/api/actions.interface'
 import { ListDataItem } from '@/components/organismn/ListData'
-import { currentRoot, selectedItemState } from '@/recoil/atoms'
+import { actionFlagState, currentRoot, selectedItemState } from '@/recoil/atoms'
 import Home from '@/templates/Home/Home'
 import { useEffect, useState } from 'react'
 import { useQuery, useMutation } from 'react-query'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import Swal from 'sweetalert2'
 
 export default function HomePage() {
   const [rootId, setRootId] = useState('')
-  const { data, isLoading } = useQuery<RootApiResponse>('rootData',  getRootData)
+  const { data, isLoading, refetch: refetchRoot } = useQuery<RootApiResponse>('rootData',  getRootData)
   const { data: currData, refetch: refetchMainData } = useQuery(['mainData', rootId], 
     () => getAllDataFromRootId(rootId), 
     {
@@ -17,8 +18,11 @@ export default function HomePage() {
   })
   const updateMutation = useMutation(updateData)
   const deleteMutation = useMutation(deleteData)
+  const insertMutation = useMutation(insertData)
   const [currendDataValue, setCurrentDataValue] = useRecoilState(currentRoot)
-  const setSelectedItem = useSetRecoilState(selectedItemState)
+  const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState)
+  const actionFlag = useRecoilValue(actionFlagState)
+
   function onRootChange(value: string){
     if(value){
       setRootId(value)
@@ -42,18 +46,53 @@ export default function HomePage() {
       deleteMutation.mutate({
         id: item.id
       })
-      // updateMutation.mutate({
-      //   id: item.id,
-      //   name: name
-      // })
     }
   }
 
   function reloadData(){
     setSelectedItem(null);
     setCurrentDataValue(undefined)
-    refetchMainData()
+    if(!selectedItem?.parent){
+      refetchRoot()
+    }else{
+      refetchMainData()
+      
+    }
   }
+
+  function insertNewData(request: InsertRequest){
+    insertMutation.mutate(request)
+  }
+
+  async function onAddRoot(){
+    const { value } = await Swal.fire({
+      title: "New Root Data",
+      input: "text",
+      inputLabel: "Enter your new Root data",
+      inputValue: '',
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "You need to write something!";
+        }
+      }
+    });
+    console.log('value add', value)
+    await insertMutation.mutateAsync({
+      name: value,
+      parent: null
+    })
+    refetchRoot()
+
+  }
+
+  useEffect(() => {
+    console.log('actionFlag', actionFlag)
+    if(actionFlag.type === 'insert'){
+      const request = actionFlag.data as InsertRequest
+      insertNewData(request)
+    }
+  }, [actionFlag])
 
   useEffect(() => {
     if(data && data.menus.length > 0){
@@ -77,17 +116,30 @@ export default function HomePage() {
   useEffect(() => {
     if(deleteMutation.status === 'success'){
       reloadData()
+      
     }
   }, [deleteMutation.status])
+
+  useEffect(() => {
+    if(insertMutation.status === 'success'){
+      reloadData()
+    }
+  }, [insertMutation.status])
 
   return (
     <Home 
       onRootChange={onRootChange}
       rootData={data?.menus || []}
-      rootDataLoading={isLoading || updateMutation.isLoading || deleteMutation.isLoading}
+      rootDataLoading={
+        isLoading || 
+        updateMutation.isLoading ||
+        deleteMutation.isLoading ||
+        insertMutation.isLoading
+      }
       mainData={currendDataValue}
       onSave={onSave}
       onDelete={onDelete}
+      onAddRoot={onAddRoot}
     />
   )
 }

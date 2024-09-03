@@ -16,9 +16,10 @@ export interface HomeProps{
   mainData?: ListDataItem
   onSave?: (item: ListDataItem | null, name: string) => void
   onDelete?: (item: ListDataItem | null, name: string) => void
+  onAddRoot?: () => void
 }
 
-function Home({ onDelete, onSave, onRootChange = noop, rootData, mainData, rootDataLoading = false }: HomeProps) {
+function Home({ onDelete, onAddRoot, onSave, onRootChange = noop, rootData, mainData, rootDataLoading = false }: HomeProps) {
   return (
     <div className={styles.homeContainer}>
       <BreadCrumb className={styles.headingContainer} items={['Menus']}/>
@@ -31,7 +32,7 @@ function Home({ onDelete, onSave, onRootChange = noop, rootData, mainData, rootD
               ))}
           </>
         </InputSelect>
-        <Button className="bg-primary hover:bg-slate-100 hover:text-primary text-white w-28 mt-3" >Add New Root + </Button>
+        <Button onClick={onAddRoot} className="bg-primary hover:bg-slate-100 hover:text-primary text-white w-28 mt-3" >Add New Root + </Button>
       </div>
     
       <div className={styles.leftContainer}>

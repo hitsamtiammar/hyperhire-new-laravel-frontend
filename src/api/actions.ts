@@ -1,4 +1,4 @@
-import { DeleteRequest, UpdateRequest } from "./actions.interface"
+import { DeleteRequest, InsertRequest, UpdateRequest } from "./actions.interface"
 import instance from "./axios"
 
 export const getRootData = async () => {
@@ -19,5 +19,13 @@ export const updateData = async({ id, name } : UpdateRequest) => {
 
 export const deleteData = async({ id } : DeleteRequest) => {
     const result = await instance.delete(`/v1/delete/${id}`)
+    return result
+}
+
+export const insertData = async({ name, parent } : InsertRequest) => {
+    const result = await instance.post('/v1/add', {
+        name, 
+        parent
+    })
     return result
 }
