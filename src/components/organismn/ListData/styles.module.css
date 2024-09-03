@@ -1,0 +1,50 @@
+.flexCol{
+    @apply flex flex-col
+}
+
+.flexRow{
+    @apply flex flex-row
+}
+
+.listDataContainer{
+    @apply flexCol mt-4
+}
+
+.listDataContent{
+    @apply flexRow h-[50px] items-center gap-1 cursor-pointer
+}
+
+.listDataChild{
+    @apply flexRow p-0
+}
+
+.listDataChildHorizontalLine{
+    @apply w-[30px] translate-x-[12px] border-l-bluegrey-400 border-l
+}
+
+.listDataChildContainer{
+    @apply flexCol flex-1
+}
+
+.addItemBtn{
+    @apply size-7 hover:bg-slate-300 rounded-full
+}
+
+.addItemIcon{
+    @apply size-7
+}
+
+.addItemIconCheck{
+    @apply addItemIcon text-green-500
+}
+
+.addItemIconClose{
+    @apply addItemIcon text-red-500
+}
+
+.plusBtn{
+    @apply size-[26px] 
+    hover:bg-blue-900 
+    justify-center ml-3 items-center 
+    rounded-full bg-blue-500
+}

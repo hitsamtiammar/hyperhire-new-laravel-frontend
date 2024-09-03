@@ -11,7 +11,7 @@
 }
 
 .leftContainer{
-    @apply flex h-28 flex-col lg:flex-row
+    @apply flex min-h-28 flex-col lg:flex-row
 }
 
 .buttonGroup{
