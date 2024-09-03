@@ -25,3 +25,7 @@
 .buttonCollapseAll{
     @apply border-bluegrey-300  hover:bg-bluegrey-900 hover:text-white border
 }
+
+.addRootButton{
+    @apply bg-primary hover:bg-slate-100 hover:text-primary text-white w-28 mt-3
+}

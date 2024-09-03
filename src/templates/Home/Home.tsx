@@ -1,4 +1,3 @@
-import React from 'react'
 import BreadCrumb from '@/components/molecules/BreadCrumb'
 import HeadingLogo from '@/components/molecules/HeadingLogo'
 import styles from './styles.module.css'
@@ -34,7 +33,7 @@ function Home({ onDelete, onCollapseAll, onExpandAll, onAddRoot, onSave, onRootC
               ))}
           </>
         </InputSelect>
-        <Button onClick={onAddRoot} className="bg-primary hover:bg-slate-100 hover:text-primary text-white w-28 mt-3" >Add New Root + </Button>
+        <Button onClick={onAddRoot} className={styles.addRootButton} >Add New Root + </Button>
       </div>
     
       <div className={styles.leftContainer}>
