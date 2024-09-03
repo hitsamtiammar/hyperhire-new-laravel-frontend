@@ -89,9 +89,14 @@ export default function Home({ rootData, rootDataLoading = false }: HomeProps) {
       <BreadCrumb className={styles.headingContainer} items={['Menus']}/>
       <HeadingLogo  className={styles.headingContainer}/>
       <InputSelect disabled={rootDataLoading} label="Menu" className={styles.menuSelect} >
+      <>
         {rootData.map(item => (
-          <option key={item.id} value={item.id}>{item.name}</option>
-        ))}
+            <option key={item.id} value={item.id}>{item.name}</option>
+          ))}
+          <option value="">
+            <Button className="bg-blue-500">--- Add New Root ---</Button>
+          </option>
+      </>
       </InputSelect>
       <div className={styles.leftContainer}>
         <div className="flex-1">

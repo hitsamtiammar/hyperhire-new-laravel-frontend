@@ -4,6 +4,9 @@ import { useRef, useState } from 'react'
 import { BiChevronDown, BiPlus, BiCheckCircle } from 'react-icons/bi'
 import { CgClose } from 'react-icons/cg';
 import styles from './styles.module.css'
+import { useSetRecoilState } from 'recoil';
+import { selectedItemState } from '@/recoil/atoms';
+import IconButton from '@/components/atoms/IconButton';
 
 export interface ListDataItem{
     id: string;
@@ -24,6 +27,7 @@ export default function ListData({ data, onRemoveItemClicked = noop }: ListDataP
     const [childrenData, setChildrenData] = useState(data.children)
     const [showAddBtn, setShowAddBtn] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
+    const setSelectedItem = useSetRecoilState(selectedItemState)
 
     const onHover = () => {
         setShowAddBtn(true)
@@ -47,6 +51,12 @@ export default function ListData({ data, onRemoveItemClicked = noop }: ListDataP
         ])
     }
 
+    function onDblClicked(){
+        if(data.id){
+            setSelectedItem(data);
+        }
+    }
+
     function onClosePressed(){
         onRemoveItemClicked(data);
     }
@@ -66,13 +76,13 @@ export default function ListData({ data, onRemoveItemClicked = noop }: ListDataP
         return (
             <>
                 {data.children.length > 0 && (
-                      <BiChevronDown onClick={() => setExpanded(!expanded)}  className="text-primary" size="25px" />
+                    <BiChevronDown onClick={() => setExpanded(!expanded)}  className="text-primary" size="25px" />
                 )}
                 <Text className="text-sm  text-primary">{data.name}</Text>
                 {showAddBtn && (
-                    <button onClick={onAddBtnClicked} className={styles.plusBtn}>
+                    <IconButton onClick={onAddBtnClicked} className={styles.plusBtn}>
                         <BiPlus color="white" size="20px"/>
-                    </button>
+                    </IconButton>
                 )}
               
             </>
@@ -83,19 +93,19 @@ export default function ListData({ data, onRemoveItemClicked = noop }: ListDataP
         return (
             <>
                 <input ref={inputRef} className="form-input" />
-                <button onClick={onChecklistConfirmed} className={styles.addItemBtn}>
+                <IconButton onClick={onChecklistConfirmed} className={styles.addItemBtn}>
                     <BiCheckCircle className={styles.addItemIconCheck} />
-                </button>
-                <button onClick={onClosePressed} className={styles.addItemBtn}>
+                </IconButton>
+                <IconButton onClick={onClosePressed} className={styles.addItemBtn}>
                     <CgClose className={styles.addItemIconClose} />
-                </button>
+                </IconButton>
             </>
         )
     }
 
     return (
         <div className={styles.listDataContainer}>
-            <div onMouseEnter={onHover} onMouseLeave={onBlur} className={styles.listDataContent}>
+            <div onDoubleClick={onDblClicked} onMouseEnter={onHover} onMouseLeave={onBlur} className={styles.listDataContent}>
                 {data.id !== '' ? renderItem() : renderAddItem()}
             </div>
             {expanded && (
