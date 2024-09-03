@@ -5,7 +5,7 @@ import { actionFlagState, currentRoot, selectedItemState } from '@/recoil/atoms'
 import Home from '@/templates/Home/Home'
 import { useEffect, useState } from 'react'
 import { useQuery, useMutation } from 'react-query'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import Swal from 'sweetalert2'
 
 export default function HomePage() {
@@ -20,7 +20,7 @@ export default function HomePage() {
   const deleteMutation = useMutation(deleteData)
   const insertMutation = useMutation(insertData)
   const [currendDataValue, setCurrentDataValue] = useRecoilState(currentRoot)
-  const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState)
+  const setSelectedItem = useSetRecoilState(selectedItemState)
   const [actionFlag, setActionFlag] = useRecoilState(actionFlagState)
 
   function onRootChange(value: string){
@@ -52,12 +52,8 @@ export default function HomePage() {
   function reloadData(){
     setSelectedItem(null);
     setCurrentDataValue(undefined)
-    if(!selectedItem?.parent){
-      refetchRoot()
-    }else{
-      refetchMainData()
-      
-    }
+    refetchRoot()
+    refetchMainData()
   }
 
   function insertNewData(request: InsertRequest){
@@ -119,6 +115,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if(currData){
+      console.log('currData', currData)
       setCurrentDataValue(currData)
     }
   }, [currData])
