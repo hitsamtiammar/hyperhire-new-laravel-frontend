@@ -7,6 +7,7 @@ import styles from './styles.module.css'
 import { useSetRecoilState } from 'recoil';
 import { selectedItemState } from '@/recoil/atoms';
 import IconButton from '@/components/atoms/IconButton';
+import React from 'react';
 
 export interface ListDataItem{
     id: string;
@@ -22,7 +23,7 @@ export interface ListDataProps{
     onRemoveItemClicked?: (item:ListDataItem) => void
 }
 
-export default function ListData({ data, onRemoveItemClicked = noop }: ListDataProps) {
+function ListData({ data, onRemoveItemClicked = noop }: ListDataProps) {
     const [expanded, setExpanded] = useState(false)
     const [childrenData, setChildrenData] = useState(data.children)
     const [showAddBtn, setShowAddBtn] = useState(false)
@@ -103,6 +104,10 @@ export default function ListData({ data, onRemoveItemClicked = noop }: ListDataP
         )
     }
 
+    if(!data){
+        return null;
+    }
+
     return (
         <div className={styles.listDataContainer}>
             <div onDoubleClick={onDblClicked} onMouseEnter={onHover} onMouseLeave={onBlur} className={styles.listDataContent}>
@@ -112,7 +117,7 @@ export default function ListData({ data, onRemoveItemClicked = noop }: ListDataP
                 <div className={styles.listDataChild}>
                     <div className={styles.listDataChildHorizontalLine}></div>
                     <div className={styles.listDataChildContainer}>
-                        {childrenData.map(item =>
+                        {childrenData?.map(item =>
                             <ListData onRemoveItemClicked={onCancelConfirmed} key={item.id || item.tempId} data={item} />
                         )}
                     </div>
@@ -121,3 +126,5 @@ export default function ListData({ data, onRemoveItemClicked = noop }: ListDataP
         </div>
     )
 }
+
+export default React.memo(ListData)

@@ -6,7 +6,7 @@ export const selectedItemState = atom<ListDataItem | null>({
     default: null
 })
 
-export const currentRoot = atom<ListDataItem | null>({
+export const currentRoot = atom<ListDataItem | undefined>({
     key: 'currentRoot',
-    default: null
+    default: undefined
 })

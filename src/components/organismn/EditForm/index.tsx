@@ -1,4 +1,3 @@
-import React from 'react'
 import InputText from '@/components/molecules/InputText'
 import styles from './styles.module.css'
 import Button from '@/components/atoms/Button'
