@@ -1,10 +1,10 @@
 import Text from '@/components/atoms/Text'
 import { noop } from '@/utils';
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BiChevronDown, BiPlus, BiCheckCircle } from 'react-icons/bi'
 import { CgClose } from 'react-icons/cg';
 import styles from './styles.module.css'
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { actionFlagState, selectedItemState } from '@/recoil/atoms';
 import IconButton from '@/components/atoms/IconButton';
 import React from 'react';
@@ -29,7 +29,15 @@ function ListData({ data, onRemoveItemClicked = noop }: ListDataProps) {
     const [showAddBtn, setShowAddBtn] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
     const setSelectedItem = useSetRecoilState(selectedItemState)
-    const setActionFlag = useSetRecoilState(actionFlagState)
+    const [actionFlag, setActionFlag] = useRecoilState(actionFlagState)
+
+    useEffect(() => {
+        if(actionFlag.type === 'expand-all'){
+            setExpanded(true)
+        }else if(actionFlag.type === 'collapse-all'){
+            setExpanded(false)
+        }
+    }, [actionFlag.type])
 
     const onHover = () => {
         setShowAddBtn(true)

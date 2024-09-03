@@ -5,7 +5,7 @@ import { actionFlagState, currentRoot, selectedItemState } from '@/recoil/atoms'
 import Home from '@/templates/Home/Home'
 import { useEffect, useState } from 'react'
 import { useQuery, useMutation } from 'react-query'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import Swal from 'sweetalert2'
 
 export default function HomePage() {
@@ -21,7 +21,7 @@ export default function HomePage() {
   const insertMutation = useMutation(insertData)
   const [currendDataValue, setCurrentDataValue] = useRecoilState(currentRoot)
   const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState)
-  const actionFlag = useRecoilValue(actionFlagState)
+  const [actionFlag, setActionFlag] = useRecoilState(actionFlagState)
 
   function onRootChange(value: string){
     if(value){
@@ -78,12 +78,28 @@ export default function HomePage() {
       }
     });
     console.log('value add', value)
+    if(!value){
+      return
+    }
     await insertMutation.mutateAsync({
       name: value,
       parent: null
     })
     refetchRoot()
+  }
 
+  function onCollapseAll(){
+    setActionFlag({
+      data: {},
+      type: 'collapse-all'
+    })
+  }
+
+  function onExpandAll(){
+    setActionFlag({
+      data: {},
+      type: 'expand-all'
+    })
   }
 
   useEffect(() => {
@@ -140,6 +156,8 @@ export default function HomePage() {
       onSave={onSave}
       onDelete={onDelete}
       onAddRoot={onAddRoot}
+      onCollapseAll={onCollapseAll}
+      onExpandAll={onExpandAll}
     />
   )
 }
